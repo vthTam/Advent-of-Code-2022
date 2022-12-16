@@ -31,8 +31,8 @@
 
 // Drawing sensors as S and beacons as B, the above arrangement of sensors and beacons looks like this:
 
-//                1    1    2    2
-//      0    5    0    5    0    5
+//             1    1    2    2
+//   0    5    0    5    0    5
 //  0 ....S.......................
 //  1 ......................S.....
 //  2 ...............S............
@@ -56,10 +56,12 @@
 // 20 ............S......S........
 // 21 ............................
 // 22 .......................B....
-// This isn't necessarily a comprehensive map of all beacons in the area, though. Because each sensor only identifies its closest beacon, if a sensor detects a beacon, you know there are no other beacons that close or closer to that sensor. There could still be beacons that just happen to not be the closest beacon to any sensor. Consider the sensor at 8,7:
+// This isn't necessarily a comprehensive map of all beacons in the area, though. Because each sensor only identifies its closest beacon, 
+// if a sensor detects a beacon, you know there are no other beacons that close or closer to that sensor. 
+// There could still be beacons that just happen to not be the closest beacon to any sensor. Consider the sensor at 8,7:
 
-//                1    1    2    2
-//      0    5    0    5    0    5
+//             1    1    2    2
+//   0    5    0    5    0    5
 // -2 ..........#.................
 // -1 .........###................
 //  0 ....S...#####...............
@@ -93,11 +95,16 @@
 // So, suppose you have an arrangement of beacons and sensors like in the example above and, just in the row where y=10, 
 // you'd like to count the number of positions a beacon cannot possibly exist. The coverage from all sensors near that row looks like this:
 
-//                  1    1    2    2
-//        0    5    0    5    0    5
+//               1    1    2    2
+//     0    5    0    5    0    5
 //  9 ...#########################...
 // 10 ..####B######################..
 // 11 .###S#############.###########.
 // In this example, in the row where y=10, there are 26 positions where a beacon cannot be present.
 
 // Consult the report from the sensors you just deployed. In the row where y=2000000, how many positions cannot contain a beacon?
+
+
+// Get absolute value of all 4 numbers in each line
+// calculate radius: absolute of x1-x2 + absolute of y1-y2
+// if y is smaller than 2000000: check if y+radius or y-radius could include 2000000: multiply the overshoot by 2, save the product+1 as max
