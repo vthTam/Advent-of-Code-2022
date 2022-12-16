@@ -105,6 +105,9 @@
 // Consult the report from the sensors you just deployed. In the row where y=2000000, how many positions cannot contain a beacon?
 
 
-// Get absolute value of all 4 numbers in each line
-// calculate radius: absolute of x1-x2 + absolute of y1-y2
-// if y is smaller than 2000000: check if y+radius or y-radius could include 2000000: multiply the overshoot by 2, save the product+1 as max
+// Get absolute value of all 4 numbers in each line as x1, y1, x2 and y2
+// Calculate radius: absolute of x1-x2 + absolute of y1-y2
+// set real max as 0
+// if y is smaller than 2000000: if y+radius-2000000 is positive, multiply the difference by 2, save the product+1 as temp max
+// if y is larger than 2000000: if y-radius-2000000 is negative, multiply the absolute difference by 2, save the product+1 as temp max
+// replace real max with temp max if temp max is larger
