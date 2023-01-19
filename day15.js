@@ -111,3 +111,41 @@
 // if y is smaller than 2000000: if y+radius-2000000 is positive, multiply the difference by 2, save the product+1 as temp max
 // if y is larger than 2000000: if y-radius-2000000 is negative, multiply the absolute difference by 2, save the product+1 as temp max
 // replace real max with temp max if temp max is larger
+
+import FileReader from 'fs'
+
+function textToStringArray (file) {
+    const text = FileReader.readFileSync(path+file, 'utf8')
+    const input = text.split('\r\n')
+    return input
+}
+
+function part1(){
+    
+    const occupied = new Set()
+    
+    const data = textToStringArray("day15_data.txt")
+
+    data.forEach((line)=>{
+        let [sensor, beacon] = line.split(':')
+        sensor = sensor.trim().replace('Sensor at ', '').trim()
+        beacon = beacon.trim().replace('closest beacon is at ', '').trim()
+
+        sensor = sensor.replace('x=','').replace('y=','').trim().split(',').map(Number)
+        beacon = beacon.replace('x=','').replace('y=','').trim().split(',').map(Number)
+
+        const euclideanDistance = Math.abs(sensor[0] - beacon[0]) + Math.abs(sensor[1] - beacon[1])
+
+        const y = process.argv.length > 2 ? 10 : 2000000
+        const posX = euclideanDistance - Math.abs(sensor[1] - y)
+        for(let x = sensor[0]-posX; x <= sensor[0]+posX; x++){
+            if(!(x === beacon[0] && y === beacon[1])){
+                occupied.add(JSON.stringify([x,y]))
+            }
+        }
+    })
+
+    return occupied.size
+}
+
+console.log(part1())
